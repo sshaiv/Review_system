@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Cards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.review-card {
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+    right: 10rem;
+    margin-left: 5rem;
+    
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user-rating {
+    font-size: 14px;
+    color: #888;
+}
+
+.review-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Optional: Add a hover effect to the review cards */
+.review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.logo img{
+    height: 5rem;
+    width: 20rem;
+}
+
+
+/* add review style */
+
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  right: 10rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+textarea {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-text {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #888;
+}
+
+
+</style>
+<body>
+    <nav style="position: relative;bottom:20rem; ">
+        <div class="logo">
+            <a href="#"> <img src="./image/fake_logo.jpeg"></a>
+            <!-- <h1>Trustpilot</h1> -->
+        </div>
+    </nav>
+    <!-- add review -->
+      <!-- add review  -->
+  <div class="container">
+    <h1>Reviews</h1>
+    <div class="comment-form">
+      <textarea id="commentInput" placeholder="Enter your comment"></textarea>
+      <button onclick="addComment()">Add</button>
+    </div>
+    <div class="comments-list" id="commentsList">
+    </div>
+  </div>
+
+  <!-- demo -->
+    <div class="review-card">
+        <div class="review-header">
+            <img src="./image/avatar.jpeg" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <h3 class="user-name">John Doe</h3>
+                <span class="user-rating">4.5 stars</span>
+            </div>
+        </div>
+        <div class="review-content">
+            <p class="review-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at lorem id quam tincidunt mollis non a eros. Nullam viverra odio vel sapien luctus, </p>
+        </div>
+    </div>
+
+    <div class="review-card">
+        <div class="review-header">
+            <img src="./image/avatar.jpeg" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <h3 class="user-name">Jane Smith</h3>
+                <span class="user-rating">5 stars</span>
+            </div>
+        </div>
+        <div class="review-content">
+            <p class="review-text">Fusce vel ligula in ex interdum finibus. Integer efficitur lacus in odio rhoncus, in tristique mi egestas. Vivamus tincidunt, ligula et volutpat euismod, sapien orci rutrum velit.</p>
+        </div>
+    </div>
+
+    <div class="review-card">
+        <div class="review-header">
+            <img src="./image/avatar.jpeg" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <h3 class="user-name">Michael Johnson</h3>
+                <span class="user-rating">3.8 stars</span>
+            </div>
+        </div>
+        <div class="review-content">
+            <p class="review-text">Sed a magna nec dolor congue consequat at eu ligula. Suspendisse vitae arcu eu ligula hendrerit varius. Aliquam vulputate risus vel lacinia lobortis. Proin eget velit turpis.</p>
+        </div>
+    </div>
+
+<!-- footer -->
+
+    
+
+
+  <script >
+    let comments = [];
+ 
+ // Function to load comments from localStorage
+ function loadComments() {
+   const savedComments = localStorage.getItem('comments');
+   if (savedComments) {
+     comments = JSON.parse(savedComments);
+     displayComments();
+   }
+ }
+ 
+ // Function to save comments to localStorage
+ function saveComments() {
+   localStorage.setItem('comments', JSON.stringify(comments));
+ }
+ 
+ function addComment() {
+   const commentInput = document.getElementById('commentInput');
+   const commentText = commentInput.value.trim();
+ 
+   if (commentText !== '') {
+     const newComment = {
+       text: commentText,
+       date: new Date().toLocaleString()
+     };
+ 
+     comments.push(newComment);
+     commentInput.value = '';
+     displayComments();
+     saveComments(); // Save the comments to localStorage after adding
+   }
+ }
+ 
+ function removeComment(index) {
+   comments.splice(index, 1);
+   displayComments();
+   saveComments(); // Save the comments to localStorage after removing
+ }
+ 
+ function displayComments() {
+   const commentsList = document.getElementById('commentsList');
+   commentsList.innerHTML = '';
+ 
+   comments.forEach((comment, index) => {
+     const commentItem = document.createElement('div');
+     commentItem.classList.add('comment-item');
+ 
+     const commentText = document.createElement('p');
+     commentText.classList.add('comment-text');
+     commentText.textContent = comment.text;
+ 
+     const commentDate = document.createElement('p');
+     commentDate.classList.add('comment-date');
+     commentDate.textContent = comment.date;
+ 
+     const removeButton = document.createElement('button');
+     removeButton.textContent = 'Remove';
+     removeButton.addEventListener('click', () => removeComment(index));
+ 
+     commentItem.appendChild(commentText);
+     commentItem.appendChild(commentDate);
+     commentItem.appendChild(removeButton);
+     commentsList.appendChild(commentItem);
+   });
+ }
+ 
+ // Call the loadComments function on page load to load comments from localStorage
+ loadComments();
+ 
+   </script>
+</body>
+</html>
